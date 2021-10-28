@@ -1,6 +1,7 @@
 package ru.netology.stats;
 
 public class StatsService {
+    long[] purchases = {8, 15, 13, 15, 17, 20, 19, 20, 7, 14, 14, 18};
 
     public long sumSales(long[] sales) {
         long summary = 0;
@@ -10,17 +11,16 @@ public class StatsService {
         return summary;
     }
 
-    public long avSumSales(long[] sales) {
-        long avsummary = 0;
-        for (long sale : sales) {
-            avsummary = avsummary + sale;
-        }
-        return avsummary / 12;
+    public long avSumSales() {
+        StatsService service = new StatsService();
+        long avSummary = service.sumSales(purchases) / 12;
+        return avSummary;
     }
 
     public int maxSales(long[] sales) {
+        int month = 0;
         int maxMonth = 0;
-        int month = 0; // переменная для индекса рассматриваемого месяца в массиве
+        // переменная для индекса рассматриваемого месяца в массиве
         for (long sale : sales) {
             if (sale >= sales[maxMonth]) {
                 maxMonth = month;
@@ -31,8 +31,8 @@ public class StatsService {
     }
 
     public int minSales(long[] sales) {
+        int month = 0;
         int minMonth = 0;
-        int month = 0; // переменная для индекса рассматриваемого месяца в массиве
         for (long sale : sales) {
             // sales[minMonth] - продажи в месяце minMonth
             // sale - продажи в рассматриваемом месяце
@@ -45,14 +45,11 @@ public class StatsService {
     }
 
     public long salesBelowAv(long[] sales) {
-        long summary = 0;
         int belowAvMnth = 0;
+        StatsService service = new StatsService();
+        long avSummary = service.sumSales(purchases) / 12;
         for (long sale : sales) {
-            summary = summary + sale;
-        }
-        long avsummary = summary / 12;
-        for (long sale : sales) {
-            if (sale < avsummary) {
+            if (sale < avSummary) {
                 belowAvMnth = belowAvMnth + 1;
             }
         }
@@ -60,29 +57,26 @@ public class StatsService {
     }
 
     public long salesAboveAv(long[] sales) {
-        long summary = 0;
         int aboveAvMnth = 0;
+        StatsService service = new StatsService();
+        long avSummary = service.sumSales(purchases) / 12;
         for (long sale : sales) {
-            summary = summary + sale;
-        }
-        long avsummary = summary / 12;
-        for (long sale : sales) {
-            if (sale > avsummary) {
+            if (sale > avSummary) {
                 aboveAvMnth = aboveAvMnth + 1;
             }
         }
         return aboveAvMnth;
     }
-    /*
-    public static void main(String[] args) {
+
+/*    public static void main(String[] args) {
         StatsService service = new StatsService();
         long[] purchases = {8, 15, 13, 15, 17, 20, 19, 20, 7, 14, 14, 18};
         System.out.println(service.sumSales(purchases));
-        System.out.println(service.avSumSales(purchases));
+        System.out.println(service.avSumSales());
         System.out.println(service.maxSales(purchases));
         System.out.println(service.minSales(purchases));
         System.out.println(service.salesBelowAv(purchases));
         System.out.println(service.salesAboveAv(purchases));
-    }
-*/
+    }*/
+
 }

@@ -18,7 +18,7 @@ class StatsServiceTest {
     void avSumSales() {
         StatsService service = new StatsService();
         int expected = 15;
-        long actual = service.avSumSales(purchases);
+        long actual = service.avSumSales();
         assertEquals(expected, actual);
         System.out.println("expected = " + expected + " and" + " actual = " + actual);
     }
